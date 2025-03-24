@@ -24,13 +24,11 @@ const User = sequelize.define('users', {
     role: { type: DataTypes.STRING, defaultValue: "Student" },
 })
 
-app.post('/Create_User', (req, res) => {
+app.delete('/Delete_User/Delete_ID/:Delete_ID', (req, res) => {
     const { id, login, passwd, role } = req.body
-    const type = User.create({
-        id, login, passwd, role
-    });
-    res.send("Data created")
-    return res.json(type);
+    let Delete_ID = Number(req.params.Delete_ID)
+    const type = User.destroy({ where: { id: Delete_ID } });
+    res.send("Data deleted")
 })
 
 async function start() {
