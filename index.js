@@ -24,8 +24,13 @@ const User = sequelize.define('users', {
     role: { type: DataTypes.STRING, defaultValue: "Student" },
 })
 
-app.get('/FIO', (req, res) => {
-    res.send('<h1>Иванов В.С 11ИС-322</h1>');
+app.post('/Create_User', (req, res) => {
+    const { id, login, passwd, role } = req.body
+    const type = User.create({
+        id, login, passwd, role
+    });
+    res.send("Data created")
+    return res.json(type);
 })
 
 async function start() {
